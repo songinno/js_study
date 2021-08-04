@@ -9,18 +9,38 @@
 ex)  정수 3 , 7 을 입력했을 시 3 + 4 + 5 + 6 + 7 의 
      총합 25를 출력해야 함!
 */
+// <내가한거>
+// var num1 = +prompt('첫번째 정수 입력');
+// var num2 = +prompt('두번째 정수 입력');
+// var total = 0; // 누적합을 저장할애.
 
+// while (num1 <= num2) {
+//     total += num1;
+
+//     num1++;
+// }
+// alert(`${num1}부터 ${num2}까지의 합은 ${total}입니다.`);
+
+// -> 이렇게 하면, 1~10합 구하려고 입력하면 11부터 10까지의 합은 55입니다. 라고 나옴. num1++때문에 11까지 카운트 되어서 그게 값이 출력됨.
+// 그래서 선생님꺼 보면, var n 으로 x의 값을 제어해준거임.
+
+// 
+// <내가한거 수정2> 이렇게 하면 제대로 나옴. (num1 을 Num1로 제어)
 var num1 = +prompt('첫번째 정수 입력');
 var num2 = +prompt('두번째 정수 입력');
 var total = 0; // 누적합을 저장할애.
-var copyNum1 = num1;
+
+var Num1 = num1
 
 while (num1 <= num2) {
     total += num1;
 
     num1++;
 }
-alert(`${copyNum1}부터 ${num2}까지의 합은 ${total}입니다.`);
+alert(`${Num1}부터 ${num2}까지의 합은 ${total}입니다.`);
+
+
+
 
 // 선생님꺼
 
@@ -32,6 +52,6 @@ alert(`${copyNum1}부터 ${num2}까지의 합은 ${total}입니다.`);
 
 // while (n <= y) {
 //     total += n;
-//     n++;
+//     n++; 
 // }
 // alert(`${x}~${y}까지의 총합 : ${total}`);
