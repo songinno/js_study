@@ -63,3 +63,6 @@ console.log('----------------------------------------');
 
 var result = foods.includes('어묵');
 console.log(result);
+
+
+// 위의 것들 말고도 더 있음. https://developer.mozilla.org/
