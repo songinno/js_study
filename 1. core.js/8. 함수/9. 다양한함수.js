@@ -106,7 +106,7 @@ console.log('-----------------');
 // }
 
 //리터럴 -> 화살표로
-var sayHello = () => console.log('안녕하세요~');  // 매개변수 없어도 소괄호 생략은x
+var sayHello = () => console.log('안녕하세요~');  //  매개변수 없어도 소괄호 생략은x
 
 
 sayHello();
