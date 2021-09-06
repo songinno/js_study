@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul id="fruits">
+        <li id="apple">사과</li>
+        <li id="banana">바나나</li>
+        <li id="grape">포도</li>
+        <li id="pineapple">파인애플</li>
+    </ul>
+
+    <ul>
+        <li>당근</li>
+        <li>양파</li>
+    </ul>
+
+    <script>
+        /*
+        #유사배열
+        -데이터 형태는 객체({}) 형태지만, key값이 인덱스처럼 순차적인 숫자로 구성되어 있고, 
+        length 프로퍼티를 가진 배열과 유사한 형태의 객체
+        */
+        const arr = {
+           0: 'a',
+           1: 'b',
+           2: 'c',
+           length: 3
+        };
+        console.log(arr[0]);  // 문법이 배열꺼.
+        console.log(arr.length);
+
+        //arr.push('d'); -> 안됨. 에러남. 배열은 아님. 배열 함수들 사용 불가.
+        //console.log(arr);
+        console.log('====================================================================');
+        // getElementsByTagName (활용도는 낮음.)
+
+        //const $elems = document.getElementsByTagName('li');
+
+        // 위에 li들만 가져오고 싶음.
+        const $fruits = document.getElementById('fruits');
+        const $elems = $fruits.getElementsByTagName('li');
+        
+        console.log($elems);
+
+        console.log($elems[0]);
+        console.log($elems.apple);
+
+        console.log($elems[0] === $elems.apple);
+
+        $elems[1].style.color = 'yellow';
+        $elems.banana.style.background = 'green';
+        
+        // 반복문으로
+        for (let i = 0; i < $elems.length; i++) {
+            $elems[i].style.fontStyle = 'italic';
+            $elems[i].style.fontSize = '2em';
+        }
+
+        for (let $e of $elems) {
+            $e.textContent = '메롱';
+        }
+
+    </script>
+
+</body>
+</html>

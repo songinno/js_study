@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        li {
+            font-size: 30px;
+        }
+        .red {
+            color: red;
+        }
+        .blue {
+            color: blue;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <ul id="fruits">
+        <li class="red">사과</li>
+        <li class="red">바나나</li>
+        <li class="red">포도</li>
+        <li class="red">복숭아</li>
+    </ul>
+
+    <script>
+       const $elems = document.getElementsByClassName('red');
+       console.log($elems);
+       //현재 elems - HTMLCollection 유사배열 타입.
+       
+        // for (let i = 0; i < $elems.length; i++) {
+        //     $elems[i].className = 'blue';
+        // }
+        // 이렇게 하면 4개 다 blue로 바뀌어야하는데, 2개만 바뀌어있음.
+
+/*
+        HTMLCollection 유사배열은 실시간 변동하는 Live DOM 입니다.
+
+        반복문 해설
+        i=0 ) 0번(사과)이 blue로 바뀌는 순간, red들로 가서 새롭게 인덱스번호를 배치. (바나나 0, 포도 1, 복숭아 2)
+
+        그리고는 i=1) 1번을 blue로 바꾸면 포도를 바꿈.
+        포도가 blue로 바뀌면, red들 재배치. (바나나 0, 복숭아 1)
+        i=2) 없음.
+
+        이렇게 실시간으로 변동되는 유사배열은, 실제배열로 변환해서 처리해야 원하는 결과를 수행할 수 있다.
+*/
+        console.log('------------------------------------');
+        //유사 배열 -> 실제배열 변환
+        const realArr = [...$elems];
+        console.log($elems);
+        console.log(realArr);  
+        // -> push. pop 등 가능.
+
+        for (let i = 0; i < realArr.length; i++) {
+            realArr[i].className = 'blue';
+        }
+        //-> 반복문 제대로 작동o (전부 blue로 바뀜)
+
+
+    </script>
+
+</body>
+</html>

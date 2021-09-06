@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #banana {
+            background: yellow;
+            /* font-size: 2em; */
+        }
+    </style>
+
+</head>
+<body>
+    
+    <ul>
+        <li id="apple">사과</li>
+        <li id="banana">바나나</li>
+        <li id="grape">포도</li>
+        <li id="pineapple">파인애플</li>
+    </ul>
+
+    <script>
+        // . ->객체
+        const $bnn = document.getElementById('banana'); // 문서로부터 id가 바나나인 요소를 가져옴. 
+        // id 틀리게쓰면 null값 나옴
+        console.log(typeof $bnn);
+        // 변수 이름 관례 : $붙임. 
+
+        // banana properties 보기에 있는것들
+        console.log($bnn.assignedSlot);
+
+        console.log($bnn.nodeName);
+        // -------------------------------
+        console.log($bnn.textContent);
+
+        $bnn.textContent = "빠나나";
+        $bnn.style.fontSize = '2em'; // css에서는 font-size인데, js에서는 - 못써서 camel로 적용.
+        $bnn.style.fontWeight = 'bold';
+
+        //id가 grape인 요소노드를 취득하여, 배경색상을 violet으로 변경
+        const $grape = document.getElementById('grape');
+        $grape.style.backgroundColor = 'violet'; // background = 'violet' 으로 써도 o
+        $grape.style.width = '300px';
+
+    </script>
+
+</body>
+</html>

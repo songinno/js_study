@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        li.fr.apple{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    
+    <ul id="fruits">
+        <li class="fr apple">사과</li>
+        <li class="fr banana">바나나</li>
+        <li class="fr grape">포도</li>
+        <li class="fr pineapple">파인애플</li>
+    </ul>
+
+    <script>
+
+        const $banana = document.querySelector('.banana'); 
+        // (.banana) = ('ul > li:nth-child(2)') , (.apple + li), 없는애 쓰면 null값 나옴.
+        $banana.style.color = 'yellow';
+        console.log($banana);
+
+        // 4개 다가지고 오고 싶었음.
+        const $elems = document.querySelector('#fruits > li'); 
+        console.log($elems); // -> 1개만 나옴. 그래서 있는게 querySelectorAll
+        
+        // * querySelectorAll
+        const $elems2 = document.querySelectorAll('#fruits > li');
+        console.log($elems2);
+
+    </script>
+    
+</body>
+</html>
