@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul id="fruits"></ul>
+
+    <script>
+        const fruitList = ['사과', '오렌지', '포도', '자몽', '귤', '라임', '딸기', '바나나', '파인애플', '깔라만시'];
+
+        //과일 10개중에 랜덤으로 5개가 li로 만들어졌으면 좋겠음.
+
+        /*  랜덤정수 만들기 공식
+        -x이상 y이하의 랜덤 정수 생성법.
+        Math.floor(Math.random()* (y - x + 1)) + x;
+        */  
+        
+
+        const $fruits = document.getElementById('fruits');
+
+        for (let i=0; i < 5; i++){
+            const $li = document.createElement('li');
+
+            const rn = Math.floor(Math.random() * fruitList.length);
+            
+            $li.textContent = fruitList[rn];
+            $fruits.appendChild($li);
+
+        }
+
+
+    </script>
+    
+</body>
+</html>

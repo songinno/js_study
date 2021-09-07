@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul id="fruits"></ul>
+
+    <script>
+        const fruitList = ['사과', '오렌지', '포도', '자몽', '귤', '라임', '딸기', '바나나', '파인애플', '깔라만시'];
+
+        //과일 10개중에 랜덤으로 5개가 li로 만들어졌으면 좋겠음.
+
+        /*  랜덤정수 만들기 공식
+        -x이상 y이하의 랜덤 정수 생성법.
+        Math.floor(Math.random()* (y - x + 1)) + x;
+        */  
+        
+        
+        const selection = []; // 중복 배제하려고 만든거
+
+        const $fruits = document.getElementById('fruits');
+
+        while (true){                   // 아니면 true 대신, selection.length < 5 로 쓰고, if break없애고.
+            const $li = document.createElement('li');
+
+            const rn = Math.floor(Math.random() * fruitList.length);
+
+            if (!selection.includes(fruitList[rn])) {
+                selection.push(fruitList[rn]);
+                $li.textContent = fruitList[rn];
+                $fruits.appendChild($li);
+            }
+            if(selection.length === 5) {
+                break;
+            }
+        }
+        // ex) 사이트 들어올때마다 음식사진 10장을 랜덤으로 보여주는, 식품관련 앱.
+
+    </script>
+    
+</body>
+</html>

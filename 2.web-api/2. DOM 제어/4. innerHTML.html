@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="KO">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #greeting span {
+            color: red;
+        }
+
+    </style>
+
+</head>
+<body>
+    
+    <div id="greeting">Hello <span>World!</span> </div>
+
+    <ul id="fruits">
+        <li>사과</li>
+    </ul>
+
+    <script>
+        const $div = document.querySelector('#greeting');
+
+        // 비교 
+        console.log($div.textContent); // 순수하게 텍스트만 나옴 -> Hello World! 
+        
+        console.log($div.innerHTML); // 안에 있는 모든 HTML 나옴. -> Hello <span>World!</span> 
+
+        // => 태그를 넣고 싶으면 innerHTML로
+        $div.innerHTML = '<span>안녕</span>하세요';
+
+
+        // =, +=
+        const $ul = document.getElementById('fruits');
+
+        //$ul.innerHTML = '<li>포도</li>'; // -> 사과가 포도로 바뀜
+        $ul.innerHTML += '<li>포도</li>'; // -> 포도 추가
+
+
+    </script>
+
+</body>
+</html>

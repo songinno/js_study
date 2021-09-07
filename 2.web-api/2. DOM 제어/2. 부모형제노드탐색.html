@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- .wrap>ul#fruits>li*3 -->
+    <div class="wrap">
+        <ul id="fruits">
+            <li>사과</li>
+            <li>바나나</li>
+            <li>포도</li>
+        </ul>
+    </div>
+
+    <!-- table#board>tr*2>td*2 -->
+    <table id="board">
+        <tr>
+            <td>A</td>
+            <td>B</td>
+        </tr>
+        <tr>
+            <td>C</td>
+            <td>D</td>
+        </tr>
+    </table>
+
+    <script>
+
+        const $banana = document.querySelector('#fruits > li:nth-child(2)')
+
+        // 부모노드탐색
+        const $parent = $banana.parentNode;
+        console.log($parent);
+        //부모의 부모 탐색
+        const $wrap = $banana.parentNode.parentNode;
+        console.log($wrap);
+
+        // ex (부모의 마지막 자식)
+        const $last = $banana.parentNode.lastElementChild;
+        console.log($last); // -> 포도
+
+        // 다음 형제노드 탐색
+        const $next = $banana.nextElementSibling;
+        console.log($next); // -> 포도
+
+        // 이전 형제노드 탐색
+        const $prev = $banana.previousElementSibling;
+        console.log($prev); // -> 사과
+
+        // 주의사항 (테이블)
+        const $board = document.getElementById('board');
+        // B를 BBB로 바꾸고 싶음.
+        //$board.firstElementChild.lastElementChild.textContent = 'BBB'; // -> 2번째 tr이 잡힘 (table의 자식으로 tbody가 자동 입력 및 생략되어 있기 때문)
+        $board.firstElementChild.firstElementChild.lastElementChild.textContent = 'BBB';
+    </script>
+
+</body>
+</html>
