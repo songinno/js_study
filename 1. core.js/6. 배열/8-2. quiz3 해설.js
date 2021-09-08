@@ -12,12 +12,12 @@
 var tvxq = ['유노윤호', '최강창민', '영웅재중', '믹키유천', '시아준수'];
 
 while (true) {
-
+    
     if (tvxq.length === 0) {
         break;
     }
     var delName = prompt(`현재 멤버: [${tvxq}]\n삭제할 이름을 입력하세요.`);
-
+    
     if (tvxq.includes(delName)) {
         tvxq.splice(tvxq.indexOf(delName), 1);
         alert(`삭제 완료! \n남은 멤버: [${tvxq}]`);
