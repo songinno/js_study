@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="email" id="account" value="abc@ggg.com">
+
+    <script>
+
+        const $input = document.querySelector('input');
+        console.log($input.attributes);
+        /*
+        ->
+        NamedNodeMap {0: type, 1: id, 2: value, type: type, id: id, value: value, length: 3}
+        0: type
+        1: id
+        2: value
+        length: 3
+        id: id
+        type: type
+        value: value
+        */
+       console.log($input.attributes[1]); // -> id = "account"
+       console.log($input.attributes.id); // -> id = "account"
+       console.log($input.attributes.id.value); // -> account
+       console.log($input.attributes.value.value); // -> abc@ggg.com
+
+       $input.attributes.value.value = 'hello@naver.com';
+
+       $input.attributes.type.value = 'checkbox';
+
+       //위에처럼 하면 길고 번거로움 -> setattribue함수로 처리함.
+
+       
+       
+       
+
+
+
+    </script>
+</body>
+</html>

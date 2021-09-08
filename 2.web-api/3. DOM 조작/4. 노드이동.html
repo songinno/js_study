@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="fruits">
+        <li>사과</li>
+        <li>바나나</li>
+        <li>포도</li>
+    </ul>
+
+    <script>
+
+        const $fruits = document.getElementById('fruits');
+
+        // li들 꺼낼때
+        const $children  = [...$fruits.children]; // -> 유사배열에 담아서 리턴 그래서 배열로 바꿔서
+        // 따로 각각의 변수에 넣어 놓고 싶음. => 배열을 분해, 배열 요소수가 20개면 20개 다 각각 해야함. -> 배열 디스트럭쳐링으로 한방에 할 수 있음
+        /*
+        const $apple = children[0];
+        const $banana = children[1];
+        const $grape = children[2];
+        */
+
+        // #배열 디스트럭쳐링(ES6+)
+        const [$apple, $banana, $grape] = [...$fruits.children];
+
+
+        //----노드 이동하기-----
+        const $mango = document.createElement('li');
+        $mango.textContent = '망고';
+        $fruits.appendChild($mango);
+        
+        //바나나를 망고 뒤로 보내고 싶음.
+        // *appendchild의 2번째 기능 (노드 이동)
+        $fruits.appendChild($banana);  // ()에 들어오는 노드가, 이미 랜더링 되어 있는 애가 들어오면, 맨 뒤로 가버림.
+
+        // *insertbefore도 똑같음.
+        $fruits.insertBefore($apple, $mango);  // -> 사과를 망고 앞으로 이동시켜라.
+
+        //연습
+        //grape를 맨 마지막 노드 바로 앞으로 (사,망,포,바)
+        //$fruits.insertBefore($grape, $banana); // 마지막 노드가 나중에 바나나가 아닐 수 있으니 밑에처럼 적어야 함.
+        $fruits.insertBefore($grape, $fruits.lastElementChild);
+        
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>

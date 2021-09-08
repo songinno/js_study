@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="fruits">
+        <li class="apple">사과</li>
+    </ul>
+
+    <script>
+
+        const $fruits = document.getElementById('fruits');
+
+        // apple의 요소 노드 취득
+        const $apple = $fruits.firstElementChild;
+
+        // #apple의 복사본 생성 - 얕은복사 : 자기 자신 노드만 복사
+        const $shallow = $apple.cloneNode(); 
+        console.log($shallow); // -> <li class="apple"></li> 텍스트는 복사 안되어있음. *텍스트는 li의 자식임. 자기 자신이 아님. 텍스트 복사하고싶으면 따로 해줘야함.
+        $shallow.textContent = '사과2';
+        $fruits.appendChild($shallow);
+
+        console.log('---------깊은복사-------------');
+
+        // # 깊은복사 : 자기 포함, 모든 자손노드를 복제
+        const $deep = $apple.cloneNode(true); // ()에 마우스 갖다대면 - (deep?: boolean) ?는 써도되고안써도되고
+        console.log($deep);
+
+        //연습
+        $fruits.appendChild($fruits.cloneNode(true));
+
+
+
+    </script>
+
+</body>
+</html>

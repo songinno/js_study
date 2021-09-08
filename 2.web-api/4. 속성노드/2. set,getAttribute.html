@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" id="user-name" value="김철수">
+
+    <script>
+
+        const $input = document.getElementById('user-name');
+
+        //console.log($input.attributes.value.value); // -> 김철수
+
+        console.log($input.getAttribute('value')); // -> 김철수 
+
+        const id = $input.getAttribute('id');
+        console.log(id); // -> user-name
+
+        // 원하는 데이터를 태그에서 뽑아낼 수 있어야 함.
+
+
+        //------------속성값 변경----------------------
+        console.log('----------속성값 변경------------');
+
+        //$input.attributes.value.value = '도우너';
+
+        $input.setAttribute('value', '도우너');
+        
+        $input.setAttribute('id', 'member-name'); // 검사해서 보면 바뀌어있음.
+
+        // #속성값 추가 (setattribute)
+        $input.setAttribute('title', '이름을 입력하시오~'); // 인풋버튼에 마우스 대니까 이름을 입력하시오 뜸.
+        $input.setAttribute('placeholder', '이름은 한글로'); // 도우너 지우고 보면 생겨있음.
+
+        // #속성값 제거
+        $input.removeAttribute('value');
+
+        // #속성 존재 유무확인
+        if ($input.hasAttribute('title')){
+            alert('타이틀 속성 있음.');
+        }
+        
+
+        
+
+
+
+    </script>
+
+</body>
+</html>
