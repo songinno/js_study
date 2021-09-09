@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="KO">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: lightgray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* 내부컨텐츠 중앙정렬 */
+        }
+        .red {
+            color: red;
+            border: 2px dashed tomato;
+        }
+        .blue {
+            color: blue;
+            border: 2px dashed aqua;
+        }
+        .circle {
+            border-radius: 50%;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div class="box red">안녕</div>
+
+    <button id="change">변경!</button>
+
+    <script>
+
+        const $box = document.querySelector('.box');
+        // class도 속성. attribute 안에 있음.
+        /*
+        attributes: NamedNodeMap [ class="box red" ]
+        0: class="box red"
+        class: class="box red"
+        length: 1
+        */
+        console.log($box.getAttribute('class')); // -> box red
+
+        // red를 blue로 교체하고 싶음.
+
+        //$box.setAttribute('class', 'box blue');  // 앞에 box를 써줘야함. 다른거 더 있으면 다 써줘야함. 불편함. 별로 안좋은 방법 --> classList 사용
+
+        // # classList
+        //요소에 클래스를 추가
+        $box.classList.add('circle');
+        $box.classList.add('aaa','bbb','ccc'); // 한번에 여러개 추가
+
+        //요소 클래스 제거
+        $box.classList.remove('circle');
+        $box.classList.remove('aaa', 'ccc');
+
+        //요소에 클래스 존재 유무 확인
+        console.log($box.classList.contains('red')); // -> true
+
+        //요소에 클래스를 교체 (변경)
+        $box.classList.replace('red', 'blue');
+
+        // toggle() : 요소에 해당 클래스가 없으면 추가, 있으면 삭제
+        $box.classList.toggle('circle'); // 동그라미됨
+        $box.classList.toggle('circle'); // 네모됨
+
+            // ex) 버튼 누르면 동그라미로, 또누르면 네모, 또누르면 동그라미, 또누르면 네모, ...
+            document.getElementById('change').onclick = e => {
+                console.log('버튼이 클릭됨!');
+                //1)
+                //클릭 시점에, 클래스 circle이 있는지 없는지부터 알아야함.
+                /*
+                if($box.classList.contains('circle')) {
+                    $box.classList.remove('circle');
+                }
+                else {
+                    $box.classList.add('circle');
+                }
+                */
+                //2) toggle로 한방에
+                $box.classList.toggle('circle');
+                
+            };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+<body>
+    
+    <div id="common" style="color: orange;">Hello</div>  
+
+    <script>
+        const $cm = document.getElementById('common');
+        console.log($cm.style.color); // -> orange
+
+        $cm.style.color = 'blue';
+        $cm.style.fontWeight = 'bold'; // => <div id="common" style="color: blue; font-weight: bold;">Hello</div>
+        //점수 1000점짜리. js에서 이렇게 제어하는게 html에서 style
+
+    </script>
+
+</body>
+</html>

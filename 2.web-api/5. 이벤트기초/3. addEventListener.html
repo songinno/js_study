@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button id="btn">클릭하세요!</button>
+
+    <script>
+
+        const $btn = document.getElementById('btn');
+
+        // #이벤트 핸들러 정의
+        function sayHello () {
+            alert('안녕안녕');
+        }
+        // 핸들러1
+        $btn.addEventListener('click', sayHello); // on 안붙임
+        // 핸들러2
+        $btn.addEventListener('click', function() {
+            $btn.style.background = 'orange'
+        }); 
+        // 핸들러3
+        
+        /* (핸들러3에 이름 달아서 제거하기 하려고 해놓음.)
+        $btn.addEventListener('click', () => {
+            $btn.textContent = '클릭완료!'
+        }); 
+        */
+
+        // 핸들러3에 이름 달아서 제거하기
+        const finishClick = () => {
+            $btn.textContent = '클릭완료!';
+        };
+
+        $btn.addEventListener('click', finishClick);
+
+        // => 핸들러 3개 해도 다 o. 프로퍼티방식의 단점 보완해버림.
+
+
+
+
+        // #이벤트 핸들러 제거
+        $btn.removeEventListener('click', sayHello);
+
+        // 핸들러 이름을 써서 제거해야함. 이름 없는 익명함수는 이걸로 제거 못함. 이름 달아줘서 없애야함.
+        
+        $btn.removeEventListener('click', finishClick);
+
+
+
+
+    </script>
+
+</body>
+</html>
