@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #fruits {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            background: skyblue;
+        }
+        #fruits li {
+            width: fit-content;
+            cursor: pointer;
+            background: lightgray;
+            margin-right: 20px;
+        }
+        .active {
+            color: red;
+            text-decoration: underline;
+        }
+        label {
+            margin-top: 20px;
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <ul id="fruits">
+        <li id="apple" class="active">Apple</li>
+        <li id="banana">Banana</li>
+        <li id="grape">Grape</li>
+    </ul>
+
+    <div>선택된 과일: <em class="msg">apple</em></div>
+
+    <label>
+        #새로운 과일 추가하기:
+        <input type="text" class="text-box">
+        <button id="add">추가</button>
+    </label>
+
+    <script>
+        const $fruits = document.querySelector('#fruits');
+        
+        const activate = e => {
+            //*****클릭대상 제한*****
+            if(!e.target.matches('#fruits > li')) {
+                return;
+            }
+            //**********************
+
+            for (let $li of [...$fruits.children]) {
+                if ($li.classList.contains('active')) {
+                    $li.classList.remove('active');
+                    break;
+                }
+            }
+            e.target.classList.add('active');
+            console.log(e.target.textContent);
+            const $em = document.querySelector('.msg');
+            $em.textContent = e.target.textContent;
+        };
+
+        // *****모든 li에 이벤트를 부여 (버블링 효과 이용)*****
+            /*
+            for (let $li of [...$fruits.children]) {
+                $li.addEventListener('click', activate);
+            }
+            */
+        $fruits.onclick = activate;  // 문제점있음. 맨 밑에서 설명.
+        //***************************************************
+        
+        const $addBtn = document.querySelector('#add');
+        $addBtn.onclick = e => {
+            const $tBox = document.querySelector('.text-box');
+            console.log($tBox.value);
+            const $newLi = document.createElement('li');
+            $newLi.textContent = $tBox.value;
+            $newLi.setAttribute('id', $tBox.value.toLowerCase());
+            $fruits.appendChild($newLi);
+            $tBox.value = '';
+            $newLi.onclick = activate;
+
+            /*
+            #개선방법 : '버블링' -> li가 아니라 ul에 이벤트를 부여 => 자식들(li들) 한테 전염됨.
+
+            #버블링 사용시 주의사항.
+            li들 사이를 클릭하면. e.tatget이 ul. ul에 액티브가 붙어버림. 글자관련 속성들이라 li들에 상속되어버림.
+            다 클릭되고, 다 선택된 항목으로 나옴.
+            => ul을 아예 클릭 못하게 해버림. (클릭대상제한)
+
+        
+            */ 
+        };
+
+
+
+
+
+    </script>
+
+</body>
+</html>

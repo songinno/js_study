@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #fruits {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+        #fruits li {
+            width: 100px;
+            cursor: pointer;
+        }
+        .active {
+            color: red;
+            text-decoration: underline;
+        }
+        label {
+            margin-top: 20px;
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <ul id="fruits">
+        <li id="apple" class="active">Apple</li>
+        <li id="banana">Banana</li>
+        <li id="grape">Grape</li>
+    </ul>
+
+    <div>선택된 과일: <em class="msg">apple</em></div>
+
+    <label>
+        #새로운 과일 추가하기:
+        <input type="text" class="text-box">
+        <button id="add">추가</button>
+    </label>
+
+    <script>
+        const $fruits = document.querySelector('#fruits');
+        
+        //이벤트 핸들러
+        const activate = e => {
+            //1. 클릭 대상 외의 class="active" 제거
+            for (let $li of [...$fruits.children]) {
+                if ($li.classList.contains('active')) {
+                    $li.classList.remove('active');
+                    break;
+                }
+            }
+            //2. 클릭 대상에 class="active" 부여
+            e.target.classList.add('active');
+            //3. em태그 안에 텍스트 선택된 과일명으로 변경.
+            
+            //선택된 것의 텍스트
+            console.log(e.target.textContent);
+            const $em = document.querySelector('.msg');
+            $em.textContent = e.target.textContent;
+        };
+
+        // 모든 li에 이벤트를 부여
+        for (let $li of [...$fruits.children]) {
+            $li.addEventListener('click', activate);
+        }
+
+        // -----------새로운 과일 추가하기--------------
+        const $addBtn = document.querySelector('#add');
+        $addBtn.onclick = e => {
+            //1. input에 작성한 텍스트를 읽는다.
+            const $tBox = document.querySelector('.text-box');
+            console.log($tBox.value);
+            //2. li 태그 만들기 (형식 : <li id="orange">Orange</li> 에 맞게)
+            //2-1. li태그 만들기
+            const $newLi = document.createElement('li');
+            //2-2. 텍스트 넣기
+            $newLi.textContent = $tBox.value;
+            //2-3. id넣기
+            $newLi.setAttribute('id', $tBox.value.toLowerCase());
+            //3. ul에 자식으로 2번에서 만든 li추가
+            $fruits.appendChild($newLi);
+            //4. input창 비우기
+            $tBox.value = '';
+            //5. 새로운 li에 이벤트 부여
+            $newLi.onclick = activate;
+            //(집가서 소문자로 쓰면 앞에만 대문자로 해서 등록되게 해보기)
+
+            /*
+                #이 방식의 문제점
+            
+            현재 코드는 모든 li들에게 각각 이벤트 핸들러를 부여하는 방식을 사용하고 있다. 
+            특히, 동적으로 생성되어 추가되는 li의 경우, 매번 핸들러를 등록하는 행위는 성능 저하, 유지보수 부담의 원인이 됨.
+
+            -> #개선방법  - 5. 이벤트위임2(개선방법)에서.
+            */ 
+        };
+
+
+
+
+
+    </script>
+
+</body>
+</html>

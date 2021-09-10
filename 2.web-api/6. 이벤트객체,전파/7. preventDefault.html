@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <a class="link" href="http://www.naver.com">네이버로 이동</a>
+
+    <form action="/login">
+        <input type="text">
+        <button id="check" type="submit">확인</button> 
+        <!-- submit -> http://127.0.0.1:5500/login?  : 서버 전송 기능이 자동 저장되어있음. 
+        전송 전 검증을 위해 자동 기능을 우선 막아야함.-->
+    </form>
+
+    <script>
+        const $link = document.querySelector('.link');
+
+        $link.onclick = e => {
+        //confirm(); : 확인 취소 버튼이 있는 창을 띄워줌. (prompt, alert 친구)
+        // 확인 누르면 true가 리턴, 취소는 false 리턴
+            if(!confirm('정말로 이동할까요?')) {
+                //a태그에는 자체적으로 자바스크립트 기능을 갖고 있음.
+                e.preventDefault(); // -> 자체 자바스크립트 기능 중단.
+            }
+        };
+
+        document.getElementById('check').onclick = e => {
+            //전송 전 자동 전송기능 막음.
+            e.preventDefault();
+
+            //서버전송 전 데이터검증 후
+            const $form = e.target.parentNode;
+            $form.submit();
+        };
+
+    </script>
+
+
+</body>
+</html>

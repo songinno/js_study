@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #fruits {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+        #fruits li {
+            width: 100px;
+            cursor: pointer;
+        }
+        .active {
+            color: red;
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <ul id="fruits">
+        <li id="apple" class="active">Apple</li>
+        <li id="banana">Banana</li>
+        <li id="grape">Grape</li>
+    </ul>
+
+    <div>선택된 과일: <em class="msg">apple</em></div>
+
+    <script>
+        const $fruits = document.querySelector('#fruits');
+        
+        //이벤트 핸들러
+        const activate = e => {
+            //1. 클릭 대상 외의 class="active" 제거
+            for (let $li of [...$fruits.children]) {
+                if ($li.classList.contains('active')) {
+                    $li.classList.remove('active');
+                    break;
+                }
+            }
+            //2. 클릭 대상에 class="active" 부여
+            e.target.classList.add('active');
+            //3. em태그 안에 텍스트 선택된 과일명으로 변경.
+            
+            //선택된 것의 텍스트
+            console.log(e.target.textContent);
+            const $em = document.querySelector('.msg');
+            $em.textContent = e.target.textContent;
+        };
+
+        // 모든 li에 이벤트를 부여
+        for (let $li of [...$fruits.children]) {
+            $li.addEventListener('click', activate);
+        }
+
+    </script>
+
+</body>
+</html>

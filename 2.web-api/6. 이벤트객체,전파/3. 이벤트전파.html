@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #fruits {
+            padding: 50px;
+            border: 2px solid red;
+        }
+        #fruits li {
+            background: yellow;
+            margin-bottom: 10px;
+        }
+        #fruits li:first-child {
+            position: absolute;
+            bottom: 10%;
+            right: 5%;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <ul id="fruits">
+        <li id="apple">Apple</li>
+        <li id="banana">Banana</li>
+        <li id="grape">Grape</li>
+    </ul>
+
+    <script>
+        const $fruits = document.getElementById('fruits');
+
+        $fruits.addEventListener('click', e => {
+            console.log('ul태그에서 이벤트 발생함!'); // li를 눌러도 이벤트 발생함.
+            // 부모한테 이벤트를 걸면, 자식한테도 전염. => 버블링 : 자식을 누르면 부모 이벤트가 터짐.
+            //ul 영역을 벗어나도 (Apple) 누르면 이벤트 터짐.
+
+            console.log('이벤트 실제 발생 요소:', e.target); //li 찍었을때) li
+            console.log('이벤트가 걸린 요소', e.currentTarget); //li 찍었을때) ul
+        });
+
+        
+        const $apple = $fruits.firstElementChild;
+        $apple.addEventListener('click', e => {
+
+            console.log('apple태그에서 이벤트 발생함!'); 
+            console.log('이벤트 실제 발생 요소:', e.target); 
+            console.log('이벤트가 걸린 요소', e.currentTarget); 
+            // 이벤트가 두개 다 터짐. apple 이벤트만 발생시키고 싶었는데. => 버블링의 문제점
+
+            // #이벤트 전파 중지
+            e.stopPropagation();
+
+        });
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <p class="msg"></p>
+
+    <script>
+
+        const $input = document.querySelector('input');
+        const $msg = document.querySelector('.msg');
+
+        $input.addEventListener('keyup', function(e) {
+            //input의 value를 꺼내오려면, 이벤트가 발생한거를 잡아와야 함.
+            //console.log(e); // -> taget : 이벤트가 발생한 태그. taget - value: "ㅁ"
+            //console.log(e.target.value); //->ㅁ
+
+            $msg.textContent = e.target.value;
+
+
+        });
+    </script>
+
+</body>
+</html>
