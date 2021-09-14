@@ -54,24 +54,15 @@ section.main .number-wrapper h2 em {
     border-radius: 10px;
     padding: 30px 50px;
     margin: 30px auto 0;
-    overflow: auto; 
-    
+    overflow: auto;
 
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-items: center;
-    row-gap: 20px;
-    
-    /*
-    #grid 말고, flex로도 해도o
     display: flex;
     flex-wrap: wrap;
-    */
 }
 
 #numbers .icon {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     font-size: 32px;
     font-weight: 700;
@@ -81,6 +72,8 @@ section.main .number-wrapper h2 em {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    margin-right: 5%;
+    margin-bottom: 20px;
 }
 
 #numbers .icon:hover {
@@ -181,7 +174,7 @@ section.main .number-wrapper h2 em {
 
 /* 정답아이콘에 id="move"가 붙으면 아이콘이 커지면서
 움직이는 애니메이션 */
-#move {
+.icon#move {
     position: absolute;
     left: 50%;
     top: 10%;
