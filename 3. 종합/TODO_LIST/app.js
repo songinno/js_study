@@ -136,9 +136,66 @@ function changeCheckState($label) {
     }
     //console.log(todos);
 }
+// *할 일 삭제 처리 함수
+function removeToDoData($li){
+    //1. 화면처리 :ul에서 삭제대상 li를 제거
+    const $ul = document.querySelector('.todo-list');
+    console.log($li);
+    $ul.removeChild($li);
+    //2. 배열데이터 삭제처리 (splice) , findeIndexById 재활용
+    const delIdx = findeIndexById(+$li.dataset.id);
+    todos.splice(delIdx, 1);
+    //console.log(todos);
+}
 
+// 수정모드 진입처리
+function enterModifyMode($modSpan){
+
+    //버튼 모양 교체 (클레스 교체: lnr-undo 에서 lnr-checkmark-circle, replace 이용)
+    //클릭된 스팬 필요
+    $modSpan.classList.replace('lnr-undo','lnr-checkmark-circle');
+
+    //텍스트 span을 input:text로 교체
+
+    //span찾기
+    const $textSpan = $modSpan.parentNode.previousElementSibling.lastElementChild; //부모한테 가서, 부모의 이전 형제중 막내를 찾음.
+    //console.log($textSpan);
+
+    //input태그 만들기
+    const $modInput = document.createElement('input');
+    $modInput.setAttribute('type', 'text');
+    $modInput.setAttribute('value', $textSpan.textContent); // 원래 써있던거 버튼 눌러도 우선 나오게 두기.
+    $modInput.classList.add('modify-input');
+
+    //태그 교체
+    const $newLabel = $textSpan.parentNode;
+    $newLabel.replaceChild($modInput, $textSpan);
+}
+// 할 일 수정 완료 처리
+function modifyToDoData($modSpan2){
+
+    //1. 버튼 모양을 원래대로 되돌림
+    $modSpan2.classList.replace('lnr-checkmark-circle','lnr-undo');
+    //2. input:text를 다시 span으로 교체
+    //input찾기
+    const $label = $modSpan2.parentNode.previousElementSibling;
+    console.log($label);
+    const $modInput2 = $label.lastElementChild;
+
+    //span 태그 만들기
+    const $newSpan = document.createElement('span');
+    $newSpan.classList.add('text');
+    $newSpan.textContent = $modInput2.value;
+
+    $label.replaceChild($newSpan, $modInput2);
+
+    //3. 배열 데이터도 수정. (indeIndexById 이용)
+    const idx = findeIndexById(+$label.parentNode.dataset.id);
+
+    todos[idx].text = $newSpan.textContent;
 
     
+}
 
 
 
@@ -147,7 +204,7 @@ function changeCheckState($label) {
 // 즉시실행함수
 
 (function() {
-    // 할 일 추가 이벤트 만들기 : click 이벤트
+    // *할 일 추가 이벤트 만들기 : click 이벤트
     const $addBtn = document.getElementById('add');
     $addBtn.addEventListener('click', e => {
         e.preventDefault();
@@ -157,7 +214,7 @@ function changeCheckState($label) {
         insertTOdoData(); // 길 것 같아서 함수로 뺌.
     });
 
-    // 할 일 완료(체크박스) 이벤트 : change 이벤트
+    // *할 일 완료(체크박스) 이벤트 : change 이벤트
     // 버블링 시키기. (ul한테 걸어서)
     const $toDoList = document.querySelector('.todo-list');
     $toDoList.addEventListener('change', e => {
@@ -169,6 +226,34 @@ function changeCheckState($label) {
 
     });
 
+    // * 할일 삭제 버튼 기능 추가하기 (버블링 이용)
+    $toDoList.addEventListener('click', e => {
+        // 제한하기
+        if (!e.target.matches('.remove span')) return;
+        // console.log('삭제버튼 클릭');
+        // console.log(e.target);
 
+        removeToDoData(e.target.parentNode.parentNode); // e.target => span, span의 부모의 부모가 클릭한 li
+    });
+
+    // * 할 일 수정 클릭 이벤트 
+    //2단계: 누르면 수정을 할 수 있는 상태가 되고, 다시한번 눌러야 수정이 완료됨. 이벤트가 2개
+    $toDoList.addEventListener('click', e => {
+        if (e.target.matches('.modify .lnr-undo')) { //수정모드 진입버튼을 눌렀으면
+            //console.log('수정모드진입버튼 클릭');
+            enterModifyMode(e.target);
+            // console.log(e.target);
+            
+        }
+        else if (e.target.matches('.modify .lnr-checkmark-circle')) { //수정 완료 버튼을 눌렀으면
+            //console.log('수정완료버튼 클릭.');
+            modifyToDoData(e.target);
+            // console.log(e.target);
+        }
+        else {    //둘 다 아닌 이상한거 눌렀으면.
+            return;
+        }
+
+    });
 
 })();
