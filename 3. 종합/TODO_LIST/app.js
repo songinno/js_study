@@ -192,11 +192,27 @@ function modifyToDoData($modSpan2){
     //3. 배열 데이터도 수정. (indeIndexById 이용)
     const idx = findeIndexById(+$label.parentNode.dataset.id);
 
-    todos[idx].text = $newSpan.textContent;
-
-    
+    todos[idx].text = $newSpan.textContent;    
 }
 
+// *할 일 추가시 입력값 검증
+function isValidate() {
+    const $todoText = document.getElementById('todo-text');
+
+    if ($todoText.value.trim() !== '') { // 글자를 썼으면
+        //trim : 공백제거를 이용해서 spacebar 막을 수 있음.
+        $todoText.style.background = '';
+        $todoText.setAttribute('placeholder', '할 일을 입력하세요.');
+        
+        return true;
+    }
+    else { // 아무것도 안썼으면
+        $todoText.style.background = 'orangered';
+        $todoText.setAttribute('placeholder', '필수입력사항입니다.');
+        $todoText.value = '';
+        return false;
+    }
+}
 
 
 
@@ -210,8 +226,10 @@ function modifyToDoData($modSpan2){
         e.preventDefault();
         //console.log("애드버턴 클릭되나 확인해보기"); 
         // ->깜빡깜빡거림 (from의 기본 전송기능 때문에.)->e.preventDefault(); 이걸로 막아버리기
-
-        insertTOdoData(); // 길 것 같아서 함수로 뺌.
+        if (isValidate()) {
+            insertTOdoData();
+        }
+             
     });
 
     // *할 일 완료(체크박스) 이벤트 : change 이벤트
